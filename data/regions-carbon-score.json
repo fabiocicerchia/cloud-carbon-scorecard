@@ -1,0 +1,1512 @@
+{
+  "generated_at_utc": "2026-01-22T19:51:41.742141+00:00",
+  "methodology": {
+    "grid_intensity_source": {
+      "dataset": "carbon-intensity-electricity",
+      "latest_year_in_dataset": 2024,
+      "metric": "lifecycle_carbon_intensity_gco2e_per_kwh",
+      "name": "Our World in Data (Ember)",
+      "owid_metric_column": "Lifecycle carbon intensity of electricity - gCO2/kWh"
+    },
+    "rating_bands_gco2e_per_kwh": {
+      "A": [
+        0,
+        100
+      ],
+      "B": [
+        100,
+        200
+      ],
+      "C": [
+        200,
+        350
+      ],
+      "D": [
+        350,
+        500
+      ],
+      "E": [
+        500,
+        650
+      ],
+      "F": [
+        650,
+        null
+      ],
+      "U": null
+    }
+  },
+  "providers": {
+    "alibaba": {
+      "regions": {
+        "ap-northeast-1": {
+          "country_input": "JP",
+          "grid_intensity_gco2e_per_kwh": 483.43,
+          "owid_entity": "Japan",
+          "rating": "D"
+        },
+        "ap-south-1": {
+          "country_input": "IN",
+          "grid_intensity_gco2e_per_kwh": 707.45,
+          "owid_entity": "India",
+          "rating": "F"
+        },
+        "ap-southeast-1": {
+          "country_input": "SG",
+          "grid_intensity_gco2e_per_kwh": 498.74,
+          "owid_entity": "Singapore",
+          "rating": "D"
+        },
+        "ap-southeast-3": {
+          "country_input": "MY",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "ap-southeast-5": {
+          "country_input": "ID",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "cn-beijing": {
+          "country_input": "CN",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "cn-hangzhou": {
+          "country_input": "CN",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "cn-hongkong": {
+          "country_input": "HK",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "cn-huhehaote": {
+          "country_input": "CN",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "cn-qingdao": {
+          "country_input": "CN",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "cn-shanghai": {
+          "country_input": "CN",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "cn-shenzhen": {
+          "country_input": "CN",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "cn-zhangjiakou": {
+          "country_input": "CN",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "eu-central-1": {
+          "country_input": "DE",
+          "grid_intensity_gco2e_per_kwh": 338.36,
+          "owid_entity": "Germany",
+          "rating": "C"
+        },
+        "me-east-1": {
+          "country_input": "AE",
+          "grid_intensity_gco2e_per_kwh": 467.51,
+          "owid_entity": "United Arab Emirates",
+          "rating": "D"
+        },
+        "us-east-1": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "us-west-1": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        }
+      }
+    },
+    "aws": {
+      "regions": {
+        "af-south-1": {
+          "country_input": "ZA",
+          "grid_intensity_gco2e_per_kwh": 713.17,
+          "owid_entity": "South Africa",
+          "rating": "F"
+        },
+        "ap-east-1": {
+          "country_input": "HK",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "ap-east-2": {
+          "country_input": "TW",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "ap-northeast-1": {
+          "country_input": "JP",
+          "grid_intensity_gco2e_per_kwh": 483.43,
+          "owid_entity": "Japan",
+          "rating": "D"
+        },
+        "ap-northeast-2": {
+          "country_input": "KR",
+          "grid_intensity_gco2e_per_kwh": 415.51,
+          "owid_entity": "South Korea",
+          "rating": "D"
+        },
+        "ap-northeast-3": {
+          "country_input": "JP",
+          "grid_intensity_gco2e_per_kwh": 483.43,
+          "owid_entity": "Japan",
+          "rating": "D"
+        },
+        "ap-south-1": {
+          "country_input": "IN",
+          "grid_intensity_gco2e_per_kwh": 707.45,
+          "owid_entity": "India",
+          "rating": "F"
+        },
+        "ap-south-2": {
+          "country_input": "IN",
+          "grid_intensity_gco2e_per_kwh": 707.45,
+          "owid_entity": "India",
+          "rating": "F"
+        },
+        "ap-southeast-1": {
+          "country_input": "SG",
+          "grid_intensity_gco2e_per_kwh": 498.74,
+          "owid_entity": "Singapore",
+          "rating": "D"
+        },
+        "ap-southeast-2": {
+          "country_input": "AU",
+          "grid_intensity_gco2e_per_kwh": 553.83,
+          "owid_entity": "Australia",
+          "rating": "E"
+        },
+        "ap-southeast-3": {
+          "country_input": "ID",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "ap-southeast-4": {
+          "country_input": "AU",
+          "grid_intensity_gco2e_per_kwh": 553.83,
+          "owid_entity": "Australia",
+          "rating": "E"
+        },
+        "ap-southeast-5": {
+          "country_input": "MY",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "ap-southeast-6": {
+          "country_input": "NZ",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "ap-southeast-7": {
+          "country_input": "TH",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "ca-central-1": {
+          "country_input": "CA",
+          "grid_intensity_gco2e_per_kwh": 185.35,
+          "owid_entity": "Canada",
+          "rating": "B"
+        },
+        "ca-west-1": {
+          "country_input": "CA",
+          "grid_intensity_gco2e_per_kwh": 185.35,
+          "owid_entity": "Canada",
+          "rating": "B"
+        },
+        "eu-central-1": {
+          "country_input": "DE",
+          "grid_intensity_gco2e_per_kwh": 338.36,
+          "owid_entity": "Germany",
+          "rating": "C"
+        },
+        "eu-central-2": {
+          "country_input": "CH",
+          "grid_intensity_gco2e_per_kwh": 29.57,
+          "owid_entity": "Switzerland",
+          "rating": "A"
+        },
+        "eu-north-1": {
+          "country_input": "SE",
+          "grid_intensity_gco2e_per_kwh": 34.89,
+          "owid_entity": "Sweden",
+          "rating": "A"
+        },
+        "eu-south-1": {
+          "country_input": "IT",
+          "grid_intensity_gco2e_per_kwh": 281.45,
+          "owid_entity": "Italy",
+          "rating": "C"
+        },
+        "eu-south-2": {
+          "country_input": "ES",
+          "grid_intensity_gco2e_per_kwh": 145.89,
+          "owid_entity": "Spain",
+          "rating": "B"
+        },
+        "eu-west-1": {
+          "country_input": "IE",
+          "grid_intensity_gco2e_per_kwh": 273.26,
+          "owid_entity": "Ireland",
+          "rating": "C"
+        },
+        "eu-west-2": {
+          "country_input": "GB",
+          "grid_intensity_gco2e_per_kwh": 216.5,
+          "owid_entity": "United Kingdom",
+          "rating": "C"
+        },
+        "eu-west-3": {
+          "country_input": "FR",
+          "grid_intensity_gco2e_per_kwh": 40.83,
+          "owid_entity": "France",
+          "rating": "A"
+        },
+        "il-central-1": {
+          "country_input": "IL",
+          "grid_intensity_gco2e_per_kwh": 567.26,
+          "owid_entity": "Israel",
+          "rating": "E"
+        },
+        "me-central-1": {
+          "country_input": "AE",
+          "grid_intensity_gco2e_per_kwh": 467.51,
+          "owid_entity": "United Arab Emirates",
+          "rating": "D"
+        },
+        "me-south-1": {
+          "country_input": "BH",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "mx-central-1": {
+          "country_input": "MX",
+          "grid_intensity_gco2e_per_kwh": 483.14,
+          "owid_entity": "Mexico",
+          "rating": "D"
+        },
+        "sa-east-1": {
+          "country_input": "BR",
+          "grid_intensity_gco2e_per_kwh": 106.06,
+          "owid_entity": "Brazil",
+          "rating": "B"
+        },
+        "us-east-1": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "us-east-2": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "us-west-1": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "us-west-2": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        }
+      }
+    },
+    "azure": {
+      "regions": {
+        "australiacentral": {
+          "country_input": "AU",
+          "grid_intensity_gco2e_per_kwh": 553.83,
+          "owid_entity": "Australia",
+          "rating": "E"
+        },
+        "australiacentral2": {
+          "country_input": "AU",
+          "grid_intensity_gco2e_per_kwh": 553.83,
+          "owid_entity": "Australia",
+          "rating": "E"
+        },
+        "australiaeast": {
+          "country_input": "AU",
+          "grid_intensity_gco2e_per_kwh": 553.83,
+          "owid_entity": "Australia",
+          "rating": "E"
+        },
+        "australiasoutheast": {
+          "country_input": "AU",
+          "grid_intensity_gco2e_per_kwh": 553.83,
+          "owid_entity": "Australia",
+          "rating": "E"
+        },
+        "austriaeast": {
+          "country_input": "AT",
+          "grid_intensity_gco2e_per_kwh": 103.21,
+          "owid_entity": "Austria",
+          "rating": "B"
+        },
+        "belgiumcentral": {
+          "country_input": "BE",
+          "grid_intensity_gco2e_per_kwh": 126.92,
+          "owid_entity": "Belgium",
+          "rating": "B"
+        },
+        "brazilsouth": {
+          "country_input": "BR",
+          "grid_intensity_gco2e_per_kwh": 106.06,
+          "owid_entity": "Brazil",
+          "rating": "B"
+        },
+        "brazilsoutheast": {
+          "country_input": "BR",
+          "grid_intensity_gco2e_per_kwh": 106.06,
+          "owid_entity": "Brazil",
+          "rating": "B"
+        },
+        "canadacentral": {
+          "country_input": "CA",
+          "grid_intensity_gco2e_per_kwh": 185.35,
+          "owid_entity": "Canada",
+          "rating": "B"
+        },
+        "canadaeast": {
+          "country_input": "CA",
+          "grid_intensity_gco2e_per_kwh": 185.35,
+          "owid_entity": "Canada",
+          "rating": "B"
+        },
+        "centralindia": {
+          "country_input": "IN",
+          "grid_intensity_gco2e_per_kwh": 707.45,
+          "owid_entity": "India",
+          "rating": "F"
+        },
+        "centralus": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "chilecentral": {
+          "country_input": "CL",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "denmarkeast": {
+          "country_input": "DK",
+          "grid_intensity_gco2e_per_kwh": 131.33,
+          "owid_entity": "Denmark",
+          "rating": "B"
+        },
+        "eastasia": {
+          "country_input": "HK",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "eastus": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "eastus2": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "francecentral": {
+          "country_input": "FR",
+          "grid_intensity_gco2e_per_kwh": 40.83,
+          "owid_entity": "France",
+          "rating": "A"
+        },
+        "francesouth": {
+          "country_input": "FR",
+          "grid_intensity_gco2e_per_kwh": 40.83,
+          "owid_entity": "France",
+          "rating": "A"
+        },
+        "germanynorth": {
+          "country_input": "DE",
+          "grid_intensity_gco2e_per_kwh": 338.36,
+          "owid_entity": "Germany",
+          "rating": "C"
+        },
+        "germanywestcentral": {
+          "country_input": "DE",
+          "grid_intensity_gco2e_per_kwh": 338.36,
+          "owid_entity": "Germany",
+          "rating": "C"
+        },
+        "indonesiacentral": {
+          "country_input": "ID",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "israelcentral": {
+          "country_input": "IL",
+          "grid_intensity_gco2e_per_kwh": 567.26,
+          "owid_entity": "Israel",
+          "rating": "E"
+        },
+        "italynorth": {
+          "country_input": "IT",
+          "grid_intensity_gco2e_per_kwh": 281.45,
+          "owid_entity": "Italy",
+          "rating": "C"
+        },
+        "japaneast": {
+          "country_input": "JP",
+          "grid_intensity_gco2e_per_kwh": 483.43,
+          "owid_entity": "Japan",
+          "rating": "D"
+        },
+        "japanwest": {
+          "country_input": "JP",
+          "grid_intensity_gco2e_per_kwh": 483.43,
+          "owid_entity": "Japan",
+          "rating": "D"
+        },
+        "koreacentral": {
+          "country_input": "KR",
+          "grid_intensity_gco2e_per_kwh": 415.51,
+          "owid_entity": "South Korea",
+          "rating": "D"
+        },
+        "koreasouth": {
+          "country_input": "KR",
+          "grid_intensity_gco2e_per_kwh": 415.51,
+          "owid_entity": "South Korea",
+          "rating": "D"
+        },
+        "malaysiawest": {
+          "country_input": "MY",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "mexicocentral": {
+          "country_input": "MX",
+          "grid_intensity_gco2e_per_kwh": 483.14,
+          "owid_entity": "Mexico",
+          "rating": "D"
+        },
+        "newzealandnorth": {
+          "country_input": "NZ",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "northcentralus": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "northeurope": {
+          "country_input": "IE",
+          "grid_intensity_gco2e_per_kwh": 273.26,
+          "owid_entity": "Ireland",
+          "rating": "C"
+        },
+        "norwayeast": {
+          "country_input": "False",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "norwaywest": {
+          "country_input": "False",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "polandcentral": {
+          "country_input": "PL",
+          "grid_intensity_gco2e_per_kwh": 611.87,
+          "owid_entity": "Poland",
+          "rating": "E"
+        },
+        "qatarcentral": {
+          "country_input": "QA",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "southafricanorth": {
+          "country_input": "ZA",
+          "grid_intensity_gco2e_per_kwh": 713.17,
+          "owid_entity": "South Africa",
+          "rating": "F"
+        },
+        "southafricawest": {
+          "country_input": "ZA",
+          "grid_intensity_gco2e_per_kwh": 713.17,
+          "owid_entity": "South Africa",
+          "rating": "F"
+        },
+        "southcentralus": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "southeastasia": {
+          "country_input": "SG",
+          "grid_intensity_gco2e_per_kwh": 498.74,
+          "owid_entity": "Singapore",
+          "rating": "D"
+        },
+        "southindia": {
+          "country_input": "IN",
+          "grid_intensity_gco2e_per_kwh": 707.45,
+          "owid_entity": "India",
+          "rating": "F"
+        },
+        "spaincentral": {
+          "country_input": "ES",
+          "grid_intensity_gco2e_per_kwh": 145.89,
+          "owid_entity": "Spain",
+          "rating": "B"
+        },
+        "swedencentral": {
+          "country_input": "SE",
+          "grid_intensity_gco2e_per_kwh": 34.89,
+          "owid_entity": "Sweden",
+          "rating": "A"
+        },
+        "switzerlandnorth": {
+          "country_input": "CH",
+          "grid_intensity_gco2e_per_kwh": 29.57,
+          "owid_entity": "Switzerland",
+          "rating": "A"
+        },
+        "switzerlandwest": {
+          "country_input": "CH",
+          "grid_intensity_gco2e_per_kwh": 29.57,
+          "owid_entity": "Switzerland",
+          "rating": "A"
+        },
+        "uaecentral": {
+          "country_input": "AE",
+          "grid_intensity_gco2e_per_kwh": 467.51,
+          "owid_entity": "United Arab Emirates",
+          "rating": "D"
+        },
+        "uaenorth": {
+          "country_input": "AE",
+          "grid_intensity_gco2e_per_kwh": 467.51,
+          "owid_entity": "United Arab Emirates",
+          "rating": "D"
+        },
+        "uksouth": {
+          "country_input": "GB",
+          "grid_intensity_gco2e_per_kwh": 216.5,
+          "owid_entity": "United Kingdom",
+          "rating": "C"
+        },
+        "ukwest": {
+          "country_input": "GB",
+          "grid_intensity_gco2e_per_kwh": 216.5,
+          "owid_entity": "United Kingdom",
+          "rating": "C"
+        },
+        "westcentralus": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "westeurope": {
+          "country_input": "NL",
+          "grid_intensity_gco2e_per_kwh": 250.43,
+          "owid_entity": "Netherlands",
+          "rating": "C"
+        },
+        "westindia": {
+          "country_input": "IN",
+          "grid_intensity_gco2e_per_kwh": 707.45,
+          "owid_entity": "India",
+          "rating": "F"
+        },
+        "westus": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "westus2": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "westus3": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        }
+      }
+    },
+    "digitalocean": {
+      "regions": {
+        "ams3": {
+          "country_input": "NL",
+          "grid_intensity_gco2e_per_kwh": 250.43,
+          "owid_entity": "Netherlands",
+          "rating": "C"
+        },
+        "atl1": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "blr1": {
+          "country_input": "IN",
+          "grid_intensity_gco2e_per_kwh": 707.45,
+          "owid_entity": "India",
+          "rating": "F"
+        },
+        "fra1": {
+          "country_input": "DE",
+          "grid_intensity_gco2e_per_kwh": 338.36,
+          "owid_entity": "Germany",
+          "rating": "C"
+        },
+        "lon1": {
+          "country_input": "GB",
+          "grid_intensity_gco2e_per_kwh": 216.5,
+          "owid_entity": "United Kingdom",
+          "rating": "C"
+        },
+        "nyc1": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "nyc2": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "nyc3": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "sfo2": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "sfo3": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "sgp1": {
+          "country_input": "SG",
+          "grid_intensity_gco2e_per_kwh": 498.74,
+          "owid_entity": "Singapore",
+          "rating": "D"
+        },
+        "syd1": {
+          "country_input": "AU",
+          "grid_intensity_gco2e_per_kwh": 553.83,
+          "owid_entity": "Australia",
+          "rating": "E"
+        },
+        "tor1": {
+          "country_input": "CA",
+          "grid_intensity_gco2e_per_kwh": 185.35,
+          "owid_entity": "Canada",
+          "rating": "B"
+        }
+      }
+    },
+    "gcp": {
+      "regions": {
+        "africa-south1": {
+          "country_input": "ZA",
+          "grid_intensity_gco2e_per_kwh": 713.17,
+          "owid_entity": "South Africa",
+          "rating": "F"
+        },
+        "asia-east1": {
+          "country_input": "TW",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "asia-east2": {
+          "country_input": "HK",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "asia-northeast1": {
+          "country_input": "JP",
+          "grid_intensity_gco2e_per_kwh": 483.43,
+          "owid_entity": "Japan",
+          "rating": "D"
+        },
+        "asia-northeast2": {
+          "country_input": "JP",
+          "grid_intensity_gco2e_per_kwh": 483.43,
+          "owid_entity": "Japan",
+          "rating": "D"
+        },
+        "asia-northeast3": {
+          "country_input": "KR",
+          "grid_intensity_gco2e_per_kwh": 415.51,
+          "owid_entity": "South Korea",
+          "rating": "D"
+        },
+        "asia-south1": {
+          "country_input": "IN",
+          "grid_intensity_gco2e_per_kwh": 707.45,
+          "owid_entity": "India",
+          "rating": "F"
+        },
+        "asia-south2": {
+          "country_input": "IN",
+          "grid_intensity_gco2e_per_kwh": 707.45,
+          "owid_entity": "India",
+          "rating": "F"
+        },
+        "asia-southeast1": {
+          "country_input": "SG",
+          "grid_intensity_gco2e_per_kwh": 498.74,
+          "owid_entity": "Singapore",
+          "rating": "D"
+        },
+        "asia-southeast2": {
+          "country_input": "ID",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "asia-southeast3": {
+          "country_input": "TH",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "australia-southeast1": {
+          "country_input": "AU",
+          "grid_intensity_gco2e_per_kwh": 553.83,
+          "owid_entity": "Australia",
+          "rating": "E"
+        },
+        "australia-southeast2": {
+          "country_input": "AU",
+          "grid_intensity_gco2e_per_kwh": 553.83,
+          "owid_entity": "Australia",
+          "rating": "E"
+        },
+        "europe-central2": {
+          "country_input": "PL",
+          "grid_intensity_gco2e_per_kwh": 611.87,
+          "owid_entity": "Poland",
+          "rating": "E"
+        },
+        "europe-north1": {
+          "country_input": "FI",
+          "grid_intensity_gco2e_per_kwh": 66.93,
+          "owid_entity": "Finland",
+          "rating": "A"
+        },
+        "europe-north2": {
+          "country_input": "SE",
+          "grid_intensity_gco2e_per_kwh": 34.89,
+          "owid_entity": "Sweden",
+          "rating": "A"
+        },
+        "europe-southwest1": {
+          "country_input": "ES",
+          "grid_intensity_gco2e_per_kwh": 145.89,
+          "owid_entity": "Spain",
+          "rating": "B"
+        },
+        "europe-west1": {
+          "country_input": "BE",
+          "grid_intensity_gco2e_per_kwh": 126.92,
+          "owid_entity": "Belgium",
+          "rating": "B"
+        },
+        "europe-west10": {
+          "country_input": "DE",
+          "grid_intensity_gco2e_per_kwh": 338.36,
+          "owid_entity": "Germany",
+          "rating": "C"
+        },
+        "europe-west12": {
+          "country_input": "IT",
+          "grid_intensity_gco2e_per_kwh": 281.45,
+          "owid_entity": "Italy",
+          "rating": "C"
+        },
+        "europe-west2": {
+          "country_input": "GB",
+          "grid_intensity_gco2e_per_kwh": 216.5,
+          "owid_entity": "United Kingdom",
+          "rating": "C"
+        },
+        "europe-west3": {
+          "country_input": "DE",
+          "grid_intensity_gco2e_per_kwh": 338.36,
+          "owid_entity": "Germany",
+          "rating": "C"
+        },
+        "europe-west4": {
+          "country_input": "NL",
+          "grid_intensity_gco2e_per_kwh": 250.43,
+          "owid_entity": "Netherlands",
+          "rating": "C"
+        },
+        "europe-west6": {
+          "country_input": "CH",
+          "grid_intensity_gco2e_per_kwh": 29.57,
+          "owid_entity": "Switzerland",
+          "rating": "A"
+        },
+        "europe-west8": {
+          "country_input": "IT",
+          "grid_intensity_gco2e_per_kwh": 281.45,
+          "owid_entity": "Italy",
+          "rating": "C"
+        },
+        "europe-west9": {
+          "country_input": "FR",
+          "grid_intensity_gco2e_per_kwh": 40.83,
+          "owid_entity": "France",
+          "rating": "A"
+        },
+        "me-central1": {
+          "country_input": "QA",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "me-central2": {
+          "country_input": "SA",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "me-west1": {
+          "country_input": "IL",
+          "grid_intensity_gco2e_per_kwh": 567.26,
+          "owid_entity": "Israel",
+          "rating": "E"
+        },
+        "northamerica-northeast1": {
+          "country_input": "CA",
+          "grid_intensity_gco2e_per_kwh": 185.35,
+          "owid_entity": "Canada",
+          "rating": "B"
+        },
+        "northamerica-northeast2": {
+          "country_input": "CA",
+          "grid_intensity_gco2e_per_kwh": 185.35,
+          "owid_entity": "Canada",
+          "rating": "B"
+        },
+        "northamerica-south1": {
+          "country_input": "MX",
+          "grid_intensity_gco2e_per_kwh": 483.14,
+          "owid_entity": "Mexico",
+          "rating": "D"
+        },
+        "southamerica-east1": {
+          "country_input": "BR",
+          "grid_intensity_gco2e_per_kwh": 106.06,
+          "owid_entity": "Brazil",
+          "rating": "B"
+        },
+        "southamerica-west1": {
+          "country_input": "CL",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "us-central1": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "us-east1": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "us-east4": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "us-east5": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "us-south1": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "us-west1": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "us-west2": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "us-west3": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "us-west4": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        }
+      }
+    },
+    "hetzner": {
+      "regions": {
+        "ash": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "fsn1": {
+          "country_input": "DE",
+          "grid_intensity_gco2e_per_kwh": 338.36,
+          "owid_entity": "Germany",
+          "rating": "C"
+        },
+        "hel1": {
+          "country_input": "FI",
+          "grid_intensity_gco2e_per_kwh": 66.93,
+          "owid_entity": "Finland",
+          "rating": "A"
+        },
+        "hil": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "nbg1": {
+          "country_input": "DE",
+          "grid_intensity_gco2e_per_kwh": 338.36,
+          "owid_entity": "Germany",
+          "rating": "C"
+        },
+        "sin": {
+          "country_input": "SG",
+          "grid_intensity_gco2e_per_kwh": 498.74,
+          "owid_entity": "Singapore",
+          "rating": "D"
+        }
+      }
+    },
+    "oracle": {
+      "regions": {
+        "australia-east-sydney": {
+          "country_input": "AU",
+          "grid_intensity_gco2e_per_kwh": 553.83,
+          "owid_entity": "Australia",
+          "rating": "E"
+        },
+        "australia-southeast-melbourne": {
+          "country_input": "AU",
+          "grid_intensity_gco2e_per_kwh": 553.83,
+          "owid_entity": "Australia",
+          "rating": "E"
+        },
+        "brazil-east-sao-paulo": {
+          "country_input": "BR",
+          "grid_intensity_gco2e_per_kwh": 106.06,
+          "owid_entity": "Brazil",
+          "rating": "B"
+        },
+        "brazil-southeast-vinhedo": {
+          "country_input": "BR",
+          "grid_intensity_gco2e_per_kwh": 106.06,
+          "owid_entity": "Brazil",
+          "rating": "B"
+        },
+        "canada-southeast-montreal": {
+          "country_input": "CA",
+          "grid_intensity_gco2e_per_kwh": 185.35,
+          "owid_entity": "Canada",
+          "rating": "B"
+        },
+        "canada-southeast-toronto": {
+          "country_input": "CA",
+          "grid_intensity_gco2e_per_kwh": 185.35,
+          "owid_entity": "Canada",
+          "rating": "B"
+        },
+        "chile-central-santiago": {
+          "country_input": "CL",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "chile-west-valparaiso": {
+          "country_input": "CL",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "colombia-central-bogota": {
+          "country_input": "CO",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "france-central-paris": {
+          "country_input": "FR",
+          "grid_intensity_gco2e_per_kwh": 40.83,
+          "owid_entity": "France",
+          "rating": "A"
+        },
+        "france-south-marseille": {
+          "country_input": "FR",
+          "grid_intensity_gco2e_per_kwh": 40.83,
+          "owid_entity": "France",
+          "rating": "A"
+        },
+        "germany-central-frankfurt": {
+          "country_input": "DE",
+          "grid_intensity_gco2e_per_kwh": 338.36,
+          "owid_entity": "Germany",
+          "rating": "C"
+        },
+        "india-south-hyderabad": {
+          "country_input": "IN",
+          "grid_intensity_gco2e_per_kwh": 707.45,
+          "owid_entity": "India",
+          "rating": "F"
+        },
+        "india-west-mumbai": {
+          "country_input": "IN",
+          "grid_intensity_gco2e_per_kwh": 707.45,
+          "owid_entity": "India",
+          "rating": "F"
+        },
+        "indonesia-north-batam": {
+          "country_input": "ID",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "israel-central-jerusalem": {
+          "country_input": "IL",
+          "grid_intensity_gco2e_per_kwh": 567.26,
+          "owid_entity": "Israel",
+          "rating": "E"
+        },
+        "italy-northwest-milan": {
+          "country_input": "IT",
+          "grid_intensity_gco2e_per_kwh": 281.45,
+          "owid_entity": "Italy",
+          "rating": "C"
+        },
+        "japan-central-osaka": {
+          "country_input": "JP",
+          "grid_intensity_gco2e_per_kwh": 483.43,
+          "owid_entity": "Japan",
+          "rating": "D"
+        },
+        "japan-east-tokyo": {
+          "country_input": "JP",
+          "grid_intensity_gco2e_per_kwh": 483.43,
+          "owid_entity": "Japan",
+          "rating": "D"
+        },
+        "mexico-central-queretaro": {
+          "country_input": "MX",
+          "grid_intensity_gco2e_per_kwh": 483.14,
+          "owid_entity": "Mexico",
+          "rating": "D"
+        },
+        "mexico-northeast-monterrey": {
+          "country_input": "MX",
+          "grid_intensity_gco2e_per_kwh": 483.14,
+          "owid_entity": "Mexico",
+          "rating": "D"
+        },
+        "netherlands-northwest-amsterdam": {
+          "country_input": "NL",
+          "grid_intensity_gco2e_per_kwh": 250.43,
+          "owid_entity": "Netherlands",
+          "rating": "C"
+        },
+        "saudi-arabia-central-riyadh": {
+          "country_input": "SA",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "saudi-arabia-west-jeddah": {
+          "country_input": "SA",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "serbia-central-jovanovac": {
+          "country_input": "RS",
+          "grid_intensity_gco2e_per_kwh": null,
+          "owid_entity": null,
+          "rating": "U"
+        },
+        "singapore-singapore": {
+          "country_input": "SG",
+          "grid_intensity_gco2e_per_kwh": 498.74,
+          "owid_entity": "Singapore",
+          "rating": "D"
+        },
+        "singapore-west-singapore": {
+          "country_input": "SG",
+          "grid_intensity_gco2e_per_kwh": 498.74,
+          "owid_entity": "Singapore",
+          "rating": "D"
+        },
+        "south-africa-central-johannesburg": {
+          "country_input": "ZA",
+          "grid_intensity_gco2e_per_kwh": 713.17,
+          "owid_entity": "South Africa",
+          "rating": "F"
+        },
+        "south-korea-central-seoul": {
+          "country_input": "KR",
+          "grid_intensity_gco2e_per_kwh": 415.51,
+          "owid_entity": "South Korea",
+          "rating": "D"
+        },
+        "south-korea-north-chuncheon": {
+          "country_input": "KR",
+          "grid_intensity_gco2e_per_kwh": 415.51,
+          "owid_entity": "South Korea",
+          "rating": "D"
+        },
+        "spain-central-madrid": {
+          "country_input": "ES",
+          "grid_intensity_gco2e_per_kwh": 145.89,
+          "owid_entity": "Spain",
+          "rating": "B"
+        },
+        "sweden-central-stockholm": {
+          "country_input": "SE",
+          "grid_intensity_gco2e_per_kwh": 34.89,
+          "owid_entity": "Sweden",
+          "rating": "A"
+        },
+        "switzerland-north-zurich": {
+          "country_input": "CH",
+          "grid_intensity_gco2e_per_kwh": 29.57,
+          "owid_entity": "Switzerland",
+          "rating": "A"
+        },
+        "uae-central-abu-dhabi": {
+          "country_input": "AE",
+          "grid_intensity_gco2e_per_kwh": 467.51,
+          "owid_entity": "United Arab Emirates",
+          "rating": "D"
+        },
+        "uae-east-dubai": {
+          "country_input": "AE",
+          "grid_intensity_gco2e_per_kwh": 467.51,
+          "owid_entity": "United Arab Emirates",
+          "rating": "D"
+        },
+        "uk-south-london": {
+          "country_input": "GB",
+          "grid_intensity_gco2e_per_kwh": 216.5,
+          "owid_entity": "United Kingdom",
+          "rating": "C"
+        },
+        "uk-west-newport": {
+          "country_input": "GB",
+          "grid_intensity_gco2e_per_kwh": 216.5,
+          "owid_entity": "United Kingdom",
+          "rating": "C"
+        },
+        "us-east-ashburn": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "us-midwest-chicago": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "us-west-phoenix": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "us-west-san-jose": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        }
+      }
+    },
+    "ovh": {
+      "regions": {
+        "BHS": {
+          "country_input": "CA",
+          "grid_intensity_gco2e_per_kwh": 185.35,
+          "owid_entity": "Canada",
+          "rating": "B"
+        },
+        "ERI": {
+          "country_input": "GB",
+          "grid_intensity_gco2e_per_kwh": 216.5,
+          "owid_entity": "United Kingdom",
+          "rating": "C"
+        },
+        "GRA": {
+          "country_input": "FR",
+          "grid_intensity_gco2e_per_kwh": 40.83,
+          "owid_entity": "France",
+          "rating": "A"
+        },
+        "GRA-SNC": {
+          "country_input": "FR",
+          "grid_intensity_gco2e_per_kwh": 40.83,
+          "owid_entity": "France",
+          "rating": "A"
+        },
+        "HIL": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "LIM": {
+          "country_input": "DE",
+          "grid_intensity_gco2e_per_kwh": 338.36,
+          "owid_entity": "Germany",
+          "rating": "C"
+        },
+        "PAR": {
+          "country_input": "FR",
+          "grid_intensity_gco2e_per_kwh": 40.83,
+          "owid_entity": "France",
+          "rating": "A"
+        },
+        "RBX": {
+          "country_input": "FR",
+          "grid_intensity_gco2e_per_kwh": 40.83,
+          "owid_entity": "France",
+          "rating": "A"
+        },
+        "RBX-SNC": {
+          "country_input": "FR",
+          "grid_intensity_gco2e_per_kwh": 40.83,
+          "owid_entity": "France",
+          "rating": "A"
+        },
+        "SBG": {
+          "country_input": "FR",
+          "grid_intensity_gco2e_per_kwh": 40.83,
+          "owid_entity": "France",
+          "rating": "A"
+        },
+        "SBG-SNC": {
+          "country_input": "FR",
+          "grid_intensity_gco2e_per_kwh": 40.83,
+          "owid_entity": "France",
+          "rating": "A"
+        },
+        "SGP": {
+          "country_input": "SG",
+          "grid_intensity_gco2e_per_kwh": 498.74,
+          "owid_entity": "Singapore",
+          "rating": "D"
+        },
+        "SYD": {
+          "country_input": "AU",
+          "grid_intensity_gco2e_per_kwh": 553.83,
+          "owid_entity": "Australia",
+          "rating": "E"
+        },
+        "VIN": {
+          "country_input": "US",
+          "grid_intensity_gco2e_per_kwh": 383.78,
+          "owid_entity": "United States",
+          "rating": "D"
+        },
+        "WAW": {
+          "country_input": "PL",
+          "grid_intensity_gco2e_per_kwh": 611.87,
+          "owid_entity": "Poland",
+          "rating": "E"
+        },
+        "YNM": {
+          "country_input": "IN",
+          "grid_intensity_gco2e_per_kwh": 707.45,
+          "owid_entity": "India",
+          "rating": "F"
+        },
+        "YYZ": {
+          "country_input": "CA",
+          "grid_intensity_gco2e_per_kwh": 185.35,
+          "owid_entity": "Canada",
+          "rating": "B"
+        }
+      }
+    },
+    "scaleway": {
+      "regions": {
+        "fr-par": {
+          "country_input": "FR",
+          "grid_intensity_gco2e_per_kwh": 40.83,
+          "owid_entity": "France",
+          "rating": "A"
+        },
+        "fr-par-1": {
+          "country_input": "FR",
+          "grid_intensity_gco2e_per_kwh": 40.83,
+          "owid_entity": "France",
+          "rating": "A"
+        },
+        "fr-par-2": {
+          "country_input": "FR",
+          "grid_intensity_gco2e_per_kwh": 40.83,
+          "owid_entity": "France",
+          "rating": "A"
+        },
+        "fr-par-3": {
+          "country_input": "FR",
+          "grid_intensity_gco2e_per_kwh": 40.83,
+          "owid_entity": "France",
+          "rating": "A"
+        },
+        "nl-ams": {
+          "country_input": "NL",
+          "grid_intensity_gco2e_per_kwh": 250.43,
+          "owid_entity": "Netherlands",
+          "rating": "C"
+        },
+        "nl-ams-1": {
+          "country_input": "NL",
+          "grid_intensity_gco2e_per_kwh": 250.43,
+          "owid_entity": "Netherlands",
+          "rating": "C"
+        },
+        "nl-ams-2": {
+          "country_input": "NL",
+          "grid_intensity_gco2e_per_kwh": 250.43,
+          "owid_entity": "Netherlands",
+          "rating": "C"
+        },
+        "nl-ams-3": {
+          "country_input": "NL",
+          "grid_intensity_gco2e_per_kwh": 250.43,
+          "owid_entity": "Netherlands",
+          "rating": "C"
+        },
+        "pl-waw": {
+          "country_input": "PL",
+          "grid_intensity_gco2e_per_kwh": 611.87,
+          "owid_entity": "Poland",
+          "rating": "E"
+        },
+        "pl-waw-1": {
+          "country_input": "PL",
+          "grid_intensity_gco2e_per_kwh": 611.87,
+          "owid_entity": "Poland",
+          "rating": "E"
+        },
+        "pl-waw-2": {
+          "country_input": "PL",
+          "grid_intensity_gco2e_per_kwh": 611.87,
+          "owid_entity": "Poland",
+          "rating": "E"
+        },
+        "pl-waw-3": {
+          "country_input": "PL",
+          "grid_intensity_gco2e_per_kwh": 611.87,
+          "owid_entity": "Poland",
+          "rating": "E"
+        }
+      }
+    }
+  },
+  "schema_version": "1.0"
+}
