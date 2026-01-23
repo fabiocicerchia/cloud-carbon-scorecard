@@ -3,8 +3,7 @@
 
 What it does
 - Reads `data/regions-map.yml` (provider -> region -> country)
-- Downloads OWID grapher dataset for lifecycle carbon intensity of electricity
-  (`carbon-intensity-electricity`)
+- Downloads Ember yearly electricity dataset for carbon intensity of electricity
 - Picks the latest available year per country
 - Computes a rating band (A-F, or U for unknown)
 - Writes `data/regions-carbon-score.json`
@@ -12,10 +11,10 @@ What it does
 Why this design
 - Mapping every cloud region to a specific grid zone is messy and changes over time.
   Keeping a simple, auditable mapping file makes updates straightforward.
-- OWID/Ember is updated annually and is easy to fetch without credentials.
+- Ember data is updated monthly and is easy to fetch without credentials.
 
 If you need real-time/subnational data
-- Swap the OWID join for Electricity Maps (requires an API key and zone mapping).
+- Swap the Ember join for Electricity Maps (requires an API key and zone mapping).
 """
 
 from __future__ import annotations
@@ -32,7 +31,7 @@ import requests
 import yaml
 
 
-OWID_CSV = "https://ourworldindata.org/grapher/carbon-intensity-electricity.csv"
+EMBER_CSV = "https://files.ember-energy.org/public-downloads/yearly_full_release_long_format.csv"
 
 RATING_BANDS = [
     ("A", 0, 100),
@@ -85,21 +84,25 @@ def load_region_map(path: str) -> Dict[str, Dict[str, str]]:
     return out
 
 
-def load_owid_latest() -> Tuple[Dict[str, float], Dict[str, Any]]:
-    df = pd.read_csv(OWID_CSV)
-    # OWID grapher format: Entity, Code, Year, <metric>
-    metric_col = [c for c in df.columns if c not in ("Entity", "Code", "Year")][0]
-    df = df.dropna(subset=[metric_col])
+def load_ember_latest() -> Tuple[Dict[str, float], Dict[str, Any]]:
+    df = pd.read_csv(EMBER_CSV)
+    # Ember long format: Area, Year, Variable, Unit, Value
+    # Filter for CO2 intensity variable
+    df = df[df["Variable"] == "CO2 intensity"].copy()
+    df = df.dropna(subset=["Value", "Year"])
     df["Year"] = df["Year"].astype(int)
 
-    # Latest per Entity (country/region)
-    latest_idx = df.groupby("Entity")["Year"].idxmax()
-    latest = df.loc[latest_idx, ["Entity", "Year", metric_col]].copy()
-    latest = latest.rename(columns={metric_col: "gco2e_per_kwh"})
-    intensity_by_entity = dict(zip(latest["Entity"], latest["gco2e_per_kwh"]))
+    if df.empty:
+        raise ValueError("No CO2 intensity data found in Ember dataset")
+
+    # Latest per Area (country/region)
+    latest_idx = df.groupby("Area")["Year"].idxmax()
+    latest = df.loc[latest_idx, ["Area", "Year", "Value"]].copy()
+    latest = latest.rename(columns={"Value": "gco2e_per_kwh"})
+    intensity_by_entity = dict(zip(latest["Area"], latest["gco2e_per_kwh"]))
 
     meta = {
-        "metric_col": metric_col,
+        "metric_col": "CO2 intensity",
         "years": {
             "min": int(df["Year"].min()),
             "max": int(df["Year"].max()),
@@ -110,7 +113,7 @@ def load_owid_latest() -> Tuple[Dict[str, float], Dict[str, Any]]:
 
 
 def resolve_country_to_entity(country: str, entities: Dict[str, float]) -> Optional[str]:
-    """Resolve ISO2 like 'DE' or common country names to OWID Entity keys."""
+    """Resolve ISO2 like 'DE' or common country names to Ember Area keys."""
     # Fast path: exact match
     if country in entities:
         return country
@@ -160,9 +163,9 @@ def resolve_country_to_entity(country: str, entities: Dict[str, float]) -> Optio
 
 def generate_markdown(data: Dict[str, Any], output_path: str) -> None:
     """Generate a markdown file with ratings and colored emojis."""
-    lines = ["# Cloud Carbon Scorecard\n"]
+    lines = ["## Cloud Carbon Scorecard\n"]
     lines.append(f"_Generated: {data['generated_at_utc']}_\n")
-    lines.append("\n## Rating Bands\n")
+    lines.append("\n### Rating Bands\n")
     lines.append("Carbon intensity in gCO₂e/kWh:\n")
 
     # Rating legend
@@ -172,12 +175,12 @@ def generate_markdown(data: Dict[str, Any], output_path: str) -> None:
         lines.append(f"- {emoji} **{label}**: {range_str} gCO₂e/kWh\n")
     lines.append(f"- {RATING_EMOJIS['U']} **U**: Unknown/No data\n")
 
-    lines.append("\n## Ratings by Provider\n")
+    lines.append("\n### Ratings by Provider\n")
 
     rating_order = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5, "U": 6}
 
     for provider, prov_data in sorted(data["providers"].items()):
-        lines.append(f"\n### {provider.upper()}\n")
+        lines.append(f"\n#### {provider.upper()}\n")
         lines.append("\n| Region | Country | Rating | Carbon Intensity (gCO₂e/kWh) |\n")
         lines.append("|--------|---------|--------|------------------------------|\n")
 
@@ -204,10 +207,10 @@ def generate_markdown(data: Dict[str, Any], output_path: str) -> None:
             lines.append(f"| `{region['region_id']}` | {region['country']} | {emoji} {region['rating']} | {intensity_str} |\n")
 
     # Add methodology section
-    lines.append("\n## Methodology\n")
+    lines.append("\n### Methodology\n")
     source = data["methodology"]["grid_intensity_source"]
     lines.append(f"**Data Source:** {source['name']}\n")
-    lines.append(f"- Dataset: `{source['dataset']}`\n")
+    lines.append(f"- Dataset URL: {source['dataset_url']}\n")
     lines.append(f"- Metric: {source['metric']}\n")
     lines.append(f"- Latest year in dataset: {source['latest_year_in_dataset']}\n")
 
@@ -215,20 +218,52 @@ def generate_markdown(data: Dict[str, Any], output_path: str) -> None:
         f.writelines(lines)
 
 
+def update_readme_with_scorecard(scorecard_path: str, readme_path: str) -> None:
+    """Update README.md with the scorecard content."""
+    # Read the scorecard content
+    with open(scorecard_path, "r", encoding="utf-8") as f:
+        scorecard_content = f.read()
+
+    # Read the current README
+    with open(readme_path, "r", encoding="utf-8") as f:
+        readme_content = f.read()
+
+    # Define markers for the scorecard section
+    start_marker = "<!-- SCORECARD_START -->"
+    end_marker = "<!-- SCORECARD_END -->"
+
+    # Check if markers exist
+    if start_marker in readme_content and end_marker in readme_content:
+        # Replace content between markers
+        start_idx = readme_content.find(start_marker)
+        end_idx = readme_content.find(end_marker) + len(end_marker)
+        new_readme = (
+            readme_content[:start_idx] +
+            f"{start_marker}\n\n{scorecard_content}\n\n{end_marker}" +
+            readme_content[end_idx:]
+        )
+    else:
+        # Append scorecard to the end with markers
+        new_readme = readme_content.rstrip() + f"\n\n{start_marker}\n\n{scorecard_content}\n\n{end_marker}\n"
+
+    # Write updated README
+    with open(readme_path, "w", encoding="utf-8") as f:
+        f.write(new_readme)
+
+
 def main() -> int:
     region_map = load_region_map("data/regions-map.yml")
-    intensity_by_entity, owid_meta = load_owid_latest()
+    intensity_by_entity, ember_meta = load_ember_latest()
 
     out: Dict[str, Any] = {
         "schema_version": "1.0",
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "methodology": {
             "grid_intensity_source": {
-                "name": "Our World in Data (Ember)",
-                "dataset": "carbon-intensity-electricity",
-                "metric": "lifecycle_carbon_intensity_gco2e_per_kwh",
-                "owid_metric_column": owid_meta["metric_col"],
-                "latest_year_in_dataset": owid_meta["years"]["max"],
+                "name": "Ember",
+                "dataset_url": EMBER_CSV,
+                "metric": ember_meta["metric_col"],
+                "latest_year_in_dataset": ember_meta["years"]["max"],
             },
             "rating_bands_gco2e_per_kwh": {k: [lo, hi] for (k, lo, hi) in RATING_BANDS} | {"U": None},
         },
@@ -243,7 +278,7 @@ def main() -> int:
             rating = rating_for(intensity)
             prov_obj["regions"][region_id] = {
                 "country_input": country,
-                "owid_entity": ent,
+                "ember_area": ent,
                 "grid_intensity_gco2e_per_kwh": None if intensity is None else float(intensity),
                 "rating": rating,
             }
@@ -257,6 +292,10 @@ def main() -> int:
     # Generate markdown scorecard
     generate_markdown(out, "SCORECARD.md")
     print("Wrote SCORECARD.md")
+
+    # Update README with scorecard
+    update_readme_with_scorecard("SCORECARD.md", "README.md")
+    print("Updated README.md with scorecard")
 
     return 0
 
