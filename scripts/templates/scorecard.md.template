@@ -1,0 +1,32 @@
+## Cloud Carbon Scorecard
+
+_Generated: {{ generated_at_utc }}_
+
+### Rating Bands
+
+Carbon intensity in gCO₂e/kWh:
+
+{% for label, lo, hi in rating_bands -%}
+- {{ rating_emojis[label] }} **{{ label }}**: {% if hi != inf %}{{ lo }}-{{ hi|int }}{% else %}{{ lo }}+{% endif %} gCO₂e/kWh
+{% endfor -%}
+- {{ rating_emojis['U'] }} **U**: Unknown/No data
+
+### Ratings by Provider
+
+{% for provider, prov_data in providers|dictsort -%}
+#### {{ provider.upper() }}
+
+| Region | Country | Rating | Carbon Intensity (gCO₂e/kWh) |
+|--------|---------|--------|------------------------------|
+{% for region in prov_data.regions_sorted -%}
+| `{{ region.region_id }}` | {{ region.country }} | {{ rating_emojis[region.rating] }} {{ region.rating }} | {% if region.intensity is not none %}{{ "%.2f"|format(region.intensity) }}{% else %}N/A{% endif %} |
+{% endfor %}
+
+{% endfor %}
+
+### Methodology
+
+**Data Source:** {{ data_source_name }}
+- Dataset URL: {{ dataset_url }}
+- Metric: {{ metric }}
+- Latest year in dataset: {{ latest_year }}

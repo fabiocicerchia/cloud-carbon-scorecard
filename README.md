@@ -9,10 +9,13 @@ This repo provides a simple, auditable dataset to support carbon-aware region se
 <!-- SCORECARD_START -->
 
 ## Cloud Carbon Scorecard
-_Generated: 2026-01-23T18:07:04.153968+00:00_
+
+_Generated: 2026-01-23T20:33:00.928797+00:00_
 
 ### Rating Bands
+
 Carbon intensity in gCO₂e/kWh:
+
 - 🟢 **A**: 0-100 gCO₂e/kWh
 - 🟡 **B**: 100-200 gCO₂e/kWh
 - 🟠 **C**: 200-350 gCO₂e/kWh
@@ -44,6 +47,7 @@ Carbon intensity in gCO₂e/kWh:
 | `cn-zhangjiakou` | CN | ⚪ U | N/A |
 | `us-east-1` | US | ⚪ U | N/A |
 | `us-west-1` | US | ⚪ U | N/A |
+
 
 #### AWS
 
@@ -83,6 +87,7 @@ Carbon intensity in gCO₂e/kWh:
 | `us-east-2` | US | ⚪ U | N/A |
 | `us-west-1` | US | ⚪ U | N/A |
 | `us-west-2` | US | ⚪ U | N/A |
+
 
 #### AZURE
 
@@ -145,6 +150,7 @@ Carbon intensity in gCO₂e/kWh:
 | `westus2` | US | ⚪ U | N/A |
 | `westus3` | US | ⚪ U | N/A |
 
+
 #### DIGITALOCEAN
 
 | Region | Country | Rating | Carbon Intensity (gCO₂e/kWh) |
@@ -162,6 +168,7 @@ Carbon intensity in gCO₂e/kWh:
 | `nyc3` | US | ⚪ U | N/A |
 | `sfo2` | US | ⚪ U | N/A |
 | `sfo3` | US | ⚪ U | N/A |
+
 
 #### GCP
 
@@ -211,6 +218,7 @@ Carbon intensity in gCO₂e/kWh:
 | `us-west3` | US | ⚪ U | N/A |
 | `us-west4` | US | ⚪ U | N/A |
 
+
 #### HETZNER
 
 | Region | Country | Rating | Carbon Intensity (gCO₂e/kWh) |
@@ -221,6 +229,7 @@ Carbon intensity in gCO₂e/kWh:
 | `sin` | SG | 🟤 D | 498.74 |
 | `ash` | US | ⚪ U | N/A |
 | `hil` | US | ⚪ U | N/A |
+
 
 #### ORACLE
 
@@ -268,6 +277,7 @@ Carbon intensity in gCO₂e/kWh:
 | `us-west-phoenix` | US | ⚪ U | N/A |
 | `us-west-san-jose` | US | ⚪ U | N/A |
 
+
 #### OVH
 
 | Region | Country | Rating | Carbon Intensity (gCO₂e/kWh) |
@@ -290,6 +300,7 @@ Carbon intensity in gCO₂e/kWh:
 | `HIL` | US | ⚪ U | N/A |
 | `VIN` | US | ⚪ U | N/A |
 
+
 #### SCALEWAY
 
 | Region | Country | Rating | Carbon Intensity (gCO₂e/kWh) |
@@ -307,12 +318,15 @@ Carbon intensity in gCO₂e/kWh:
 | `pl-waw-2` | PL | 🔴 E | 592.20 |
 | `pl-waw-3` | PL | 🔴 E | 592.20 |
 
+
+
+
 ### Methodology
+
 **Data Source:** Ember
 - Dataset URL: https://files.ember-energy.org/public-downloads/yearly_full_release_long_format.csv
 - Metric: CO2 intensity
 - Latest year in dataset: 2025
-
 
 <!-- SCORECARD_END -->
 
@@ -320,7 +334,7 @@ Carbon intensity in gCO₂e/kWh:
 
 ```bash
 python3 -m venv .venv && source ./.venv/bin/activate
-pip install pandas requests pyyaml
+pip install -r requirements.txt
 python scripts/generate_regions_score.py
 ```
 

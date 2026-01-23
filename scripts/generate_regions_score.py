@@ -20,18 +20,22 @@ If you need real-time/subnational data
 from __future__ import annotations
 
 import json
-import sys
-import re
-from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Dict, Any, Tuple, Optional
 
 import pandas as pd
-import requests
 import yaml
+from jinja2 import Environment, FileSystemLoader
 
 
 EMBER_CSV = "https://files.ember-energy.org/public-downloads/yearly_full_release_long_format.csv"
+
+# File paths
+REGIONS_MAP_FILE = "data/regions-map.yml"
+ISO2_COUNTRY_MAP_FILE = "data/iso2-country-map.yml"
+REGIONS_SCORE_FILE = "data/regions-carbon-score.json"
+README_FILE = "README.md"
+TEMPLATE_FILE = "scripts/templates/scorecard.md.template"
 
 RATING_BANDS = [
     ("A", 0, 100),
@@ -39,7 +43,7 @@ RATING_BANDS = [
     ("C", 200, 350),
     ("D", 350, 500),
     ("E", 500, 650),
-    ("F", 650, None),
+    ("F", 650, float('inf')),
 ]
 
 RATING_EMOJIS = {
@@ -52,22 +56,23 @@ RATING_EMOJIS = {
     "U": "⚪",  # White circle (Unknown)
 }
 
-RATING_COLORS = {
-    "A": "#22c55e",  # Green
-    "B": "#eab308",  # Yellow
-    "C": "#f97316",  # Orange
-    "D": "#92400e",  # Brown
-    "E": "#dc2626",  # Red
-    "F": "#9333ea",  # Purple
-    "U": "#9ca3af",  # Gray (Unknown)
-}
+# Derive rating order from RATING_BANDS
+RATING_ORDER = {label: idx for idx, (label, _, _) in enumerate(RATING_BANDS)}
+RATING_ORDER["U"] = len(RATING_BANDS)
+
+# Load ISO2 to country name mapping
+def _load_iso2_map() -> Dict[str, str]:
+    with open(ISO2_COUNTRY_MAP_FILE, "r", encoding="utf-8") as f:
+        return yaml.safe_load(f) or {}
+
+ISO2_COUNTRY_MAP = _load_iso2_map()
 
 
 def rating_for(value: Optional[float]) -> str:
     if value is None or pd.isna(value):
         return "U"
     for label, lo, hi in RATING_BANDS:
-        if value >= lo and (hi is None or value < hi):
+        if value >= lo and value < hi:
             return label
     return "U"
 
@@ -80,7 +85,10 @@ def load_region_map(path: str) -> Dict[str, Dict[str, str]]:
     for provider, regions in data.items():
         if not isinstance(regions, dict):
             continue
-        out[str(provider)] = {str(k): str(v) for k, v in regions.items()}
+        provider_key = str(provider)
+        out[provider_key] = {}
+        for region_id, country in regions.items():
+            out[provider_key][str(region_id)] = str(country)
     return out
 
 
@@ -118,39 +126,8 @@ def resolve_country_to_entity(country: str, entities: Dict[str, float]) -> Optio
     if country in entities:
         return country
 
-    iso2_map = {
-        "US": "United States",
-        "GB": "United Kingdom",
-        "IE": "Ireland",
-        "DE": "Germany",
-        "NL": "Netherlands",
-        "FR": "France",
-        "PL": "Poland",
-        "CA": "Canada",
-        "SG": "Singapore",
-        "IN": "India",
-        "FI": "Finland",
-        "AU": "Australia",
-        "JP": "Japan",
-        "KR": "South Korea",
-        "AE": "United Arab Emirates",
-        "ZA": "South Africa",
-        "BR": "Brazil",
-        "ES": "Spain",
-        "IT": "Italy",
-        "SE": "Sweden",
-        "NO": "Norway",
-        "CH": "Switzerland",
-        "BE": "Belgium",
-        "AT": "Austria",
-        "PT": "Portugal",
-        "DK": "Denmark",
-        "CZ": "Czechia",
-        "IL": "Israel",
-        "MX": "Mexico",
-    }
-    if country in iso2_map and iso2_map[country] in entities:
-        return iso2_map[country]
+    if country in ISO2_COUNTRY_MAP and ISO2_COUNTRY_MAP[country] in entities:
+        return ISO2_COUNTRY_MAP[country]
 
     # Try case-insensitive match
     c_low = country.strip().lower()
@@ -161,29 +138,11 @@ def resolve_country_to_entity(country: str, entities: Dict[str, float]) -> Optio
     return None
 
 
-def generate_markdown(data: Dict[str, Any], output_path: str) -> None:
-    """Generate a markdown file with ratings and colored emojis."""
-    lines = ["## Cloud Carbon Scorecard\n"]
-    lines.append(f"_Generated: {data['generated_at_utc']}_\n")
-    lines.append("\n### Rating Bands\n")
-    lines.append("Carbon intensity in gCO₂e/kWh:\n")
-
-    # Rating legend
-    for label, lo, hi in RATING_BANDS:
-        emoji = RATING_EMOJIS.get(label, "")
-        range_str = f"{lo}-{hi}" if hi is not None else f"{lo}+"
-        lines.append(f"- {emoji} **{label}**: {range_str} gCO₂e/kWh\n")
-    lines.append(f"- {RATING_EMOJIS['U']} **U**: Unknown/No data\n")
-
-    lines.append("\n### Ratings by Provider\n")
-
-    rating_order = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5, "U": 6}
-
-    for provider, prov_data in sorted(data["providers"].items()):
-        lines.append(f"\n#### {provider.upper()}\n")
-        lines.append("\n| Region | Country | Rating | Carbon Intensity (gCO₂e/kWh) |\n")
-        lines.append("|--------|---------|--------|------------------------------|\n")
-
+def generate_markdown(data: Dict[str, Any]) -> str:
+    """Generate markdown content from template with ratings and colored emojis."""
+    # Prepare provider data with sorted regions
+    providers_data = {}
+    for provider, prov_data in data["providers"].items():
         # Collect regions for this provider
         regions = []
         for region_id, region_data in prov_data["regions"].items():
@@ -196,34 +155,42 @@ def generate_markdown(data: Dict[str, Any], output_path: str) -> None:
 
         # Sort by rating (A->F->U), then by intensity (low to high), then by region_id
         regions.sort(key=lambda x: (
-            rating_order.get(x["rating"], 99),
+            RATING_ORDER.get(x["rating"], 99),
             x["intensity"] if x["intensity"] is not None else 999999,
             x["region_id"]
         ))
 
-        for region in regions:
-            emoji = RATING_EMOJIS.get(region["rating"], "")
-            intensity_str = f"{region['intensity']:.2f}" if region["intensity"] is not None else "N/A"
-            lines.append(f"| `{region['region_id']}` | {region['country']} | {emoji} {region['rating']} | {intensity_str} |\n")
+        providers_data[provider] = {
+            "regions": prov_data["regions"],
+            "regions_sorted": regions
+        }
 
-    # Add methodology section
-    lines.append("\n### Methodology\n")
+    # Get methodology data
     source = data["methodology"]["grid_intensity_source"]
-    lines.append(f"**Data Source:** {source['name']}\n")
-    lines.append(f"- Dataset URL: {source['dataset_url']}\n")
-    lines.append(f"- Metric: {source['metric']}\n")
-    lines.append(f"- Latest year in dataset: {source['latest_year_in_dataset']}\n")
 
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.writelines(lines)
+    # Setup Jinja2 environment
+    template_dir = "scripts/templates"
+    env = Environment(loader=FileSystemLoader(template_dir))
+    template = env.get_template("scorecard.md.template")
+
+    # Render template with data
+    content = template.render(
+        generated_at_utc=data["generated_at_utc"],
+        rating_bands=RATING_BANDS,
+        rating_emojis=RATING_EMOJIS,
+        providers=providers_data,
+        data_source_name=source["name"],
+        dataset_url=source["dataset_url"],
+        metric=source["metric"],
+        latest_year=source["latest_year_in_dataset"],
+        inf=float('inf')
+    )
+
+    return content
 
 
-def update_readme_with_scorecard(scorecard_path: str, readme_path: str) -> None:
+def update_readme_with_scorecard(scorecard_content: str, readme_path: str) -> None:
     """Update README.md with the scorecard content."""
-    # Read the scorecard content
-    with open(scorecard_path, "r", encoding="utf-8") as f:
-        scorecard_content = f.read()
-
     # Read the current README
     with open(readme_path, "r", encoding="utf-8") as f:
         readme_content = f.read()
@@ -252,7 +219,7 @@ def update_readme_with_scorecard(scorecard_path: str, readme_path: str) -> None:
 
 
 def main() -> int:
-    region_map = load_region_map("data/regions-map.yml")
+    region_map = load_region_map(REGIONS_MAP_FILE)
     intensity_by_entity, ember_meta = load_ember_latest()
 
     out: Dict[str, Any] = {
@@ -265,7 +232,7 @@ def main() -> int:
                 "metric": ember_meta["metric_col"],
                 "latest_year_in_dataset": ember_meta["years"]["max"],
             },
-            "rating_bands_gco2e_per_kwh": {k: [lo, hi] for (k, lo, hi) in RATING_BANDS} | {"U": None},
+            "rating_bands_gco2e_per_kwh": {k: [lo, hi if hi != float('inf') else None] for (k, lo, hi) in RATING_BANDS} | {"U": None},
         },
         "providers": {},
     }
@@ -284,18 +251,15 @@ def main() -> int:
             }
         out["providers"][provider] = prov_obj
 
-    with open("data/regions-carbon-score.json", "w", encoding="utf-8") as f:
+    with open(REGIONS_SCORE_FILE, "w", encoding="utf-8") as f:
         json.dump(out, f, indent=2, sort_keys=True)
 
-    print("Wrote data/regions-carbon-score.json")
+    print(f"Wrote {REGIONS_SCORE_FILE}")
 
-    # Generate markdown scorecard
-    generate_markdown(out, "SCORECARD.md")
-    print("Wrote SCORECARD.md")
-
-    # Update README with scorecard
-    update_readme_with_scorecard("SCORECARD.md", "README.md")
-    print("Updated README.md with scorecard")
+    # Generate markdown scorecard content and inject directly into README
+    scorecard_content = generate_markdown(out)
+    update_readme_with_scorecard(scorecard_content, README_FILE)
+    print(f"Updated {README_FILE} with scorecard")
 
     return 0
 
