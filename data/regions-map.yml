@@ -1,6 +1,11 @@
 # Region -> country mapping used to join cloud regions to grid carbon intensity.
 # Values should be ISO 3166-1 alpha-2 when possible, or a full country name understood by OWID "Entity".
 # Tip: keep keys stable (provider region identifiers), even if display names change.
+#
+# Quote any value YAML 1.1 would read as a boolean — NO, N, Y, YES, ON, OFF and
+# their case variants. An unquoted NO parses as the boolean false and reaches
+# the generator as the string "False", so the region never resolves and lands
+# with rating "U". Norway is the one that bites; the rest are here as a warning.
 
 oracle:
   us-east-ashburn: US
@@ -87,8 +92,8 @@ azure:
   newzealandnorth: NZ
   northeurope: IE
   westeurope: NL
-  norwayeast: NO
-  norwaywest: NO
+  norwayeast: "NO"
+  norwaywest: "NO"
   polandcentral: PL
   qatarcentral: QA
   southafricanorth: ZA
