@@ -1,5 +1,10 @@
 # Cloud Region Carbon-Intensity Ratings
 
+> [!WARNING]
+> **This project is retired** and no longer maintained. It has been merged into
+> [carbon-region-picker](https://github.com/fabiocicerchia/carbon-region-picker);
+> use that instead.
+
 This repo provides a simple, auditable dataset to support carbon-aware region selection.
 
 - **Input mapping**: `data/regions-map.yml` (provider region -> country)
